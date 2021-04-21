@@ -1,0 +1,44 @@
+{
+    "name": "nodejs-template",
+    "version": "1.0.1",
+    "description": "template for a node app",
+    "author": "Juan David Hurtado",
+    "license": "MIT",
+    "main": "src/server.js",
+    "keywords": [],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/juandahurt/nodejs-template"
+    },
+    "engines": {
+        "node": "10.15.1",
+        "npm": "6.4.1"
+    },
+    "scripts": {
+        "start": "tsc && node dist/server.js",
+        "test": "jest --detectOpenHandles"
+    },
+    "dependencies": {
+        "@hapi/joi": "^17.1.1",
+        "@juandahurt_t/logger": "^1.0.1",
+        "@types/express": "^4.17.7",
+        "@types/jest": "^26.0.13",
+        "@types/node": "^14.6.0",
+        "bcrypt": "^5.0.0",
+        "express": "4.16",
+        "jsonwebtoken": "^8.5.1",
+        "module-alias": "^2.2.2",
+        "mongoose": "^5.7.5",
+        "morgan": "^1.10.0"
+    },
+    "devDependencies": {
+        "@types/mongoose": "^5.7.36",
+        "jest": "^26.0.0",
+        "nodemon": "^1.19.1",
+        "ts-jest": "^26.3.0",
+        "typescript": "^4.0.2"
+    },
+    "_moduleAliases": {
+        "logger": "dist/local_modules/logger"
+    }
+}
