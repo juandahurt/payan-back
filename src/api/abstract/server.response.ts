@@ -1,7 +1,7 @@
 /**
  * Response of every endpoint
  */
-interface ServerResponse<T> {
+export interface ServerResponse<T> {
     /**
      * True if the server excecuted 
      */
