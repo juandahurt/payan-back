@@ -7,6 +7,7 @@ import { config, environments } from './config'
 
 // @ts-ignore
 import morgan from 'morgan';
+import cors from 'cors';
 import appRouter from './api';
 
 export class Express {
@@ -22,8 +23,9 @@ export class Express {
     }
 
     private setMiddlewares() {
-        this.app.use(express.json())
+        this.app.use(express.json());
         this.app.use(express.urlencoded({extended: false}));
+        this.app.use(cors());
     }
 
     private setRouter() {
