@@ -1,7 +1,7 @@
 import express from 'express';
-import { UserRouter } from './components/user';
+import { PlaceRouter } from './components/place/web/place.router';
 
 const appRouter = express.Router();
-appRouter.use('/user', new UserRouter().router);
+appRouter.use('/place', new PlaceRouter().router);
 
 export default appRouter;

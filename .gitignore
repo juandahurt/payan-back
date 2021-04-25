@@ -6,3 +6,6 @@ dist
 
 # MacOS only
 .DS_Store
+
+# Enviroment file
+.env
