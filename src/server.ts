@@ -9,7 +9,7 @@ class Server {
     static run() {
         let express = new Express()
         express.app.listen(config.port, config.host, () => {
-            console.log(`server started on port: ${config.port}`);
+            console.log(`server started on ${config.host}:${config.port}`);
         }).on('error', function(err: any) {
             process.exit()
         });
