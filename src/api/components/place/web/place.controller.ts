@@ -1,5 +1,6 @@
 import { Place } from "../dal/place.model";
 import { PlaceService } from "../services/place.service";
+import { ServerResponse } from "../../../abstract/server.response";
 
 export class PlaceController {
     /**
