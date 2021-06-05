@@ -11,5 +11,6 @@ export class PlaceRouter {
 
     private setRoutes() {
         this.router.get('/', PlaceController.list);
+        this.router.post('/', PlaceController.create);
     }
 }

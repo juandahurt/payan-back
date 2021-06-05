@@ -22,4 +22,24 @@ export class PlaceController {
             console.log(err)
         }
     }
+
+    /**
+     * Creates a historical places
+     * @param req Client request
+     * @param res Server response
+     */
+    static async create(req: any, res: any) {
+        try {
+            let place = await new PlaceService().create(req.body);
+            let response: ServerResponse<Place> = {
+                success: true,
+                title: "Éxito",
+                description: "Lugar histórico creado exitosamente.",
+                data: place
+            }
+            res.status(201).send(response);
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }

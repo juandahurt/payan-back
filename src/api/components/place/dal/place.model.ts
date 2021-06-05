@@ -1,13 +1,26 @@
 import mongoose from 'mongoose';
 
 /**
- * Historic place
+ *  Place
  */
 export interface Place extends mongoose.Document {
     /**
-     * Name of the Historic place
+     * Name of the historical place
      */
-    name: string
+    name: string;
+
+    /**
+     * Base 64 representation of the image
+     */
+    image: string;
+}
+
+/**
+ *  
+ */
+export enum PlaceType {
+    historical,
+    museum
 }
 
 const placeSchema = new mongoose.Schema({
