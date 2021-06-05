@@ -39,7 +39,9 @@ export class PlaceController {
             }
             res.status(201).send(response);
         } catch (err) {
-            console.log(err)
+            res.status(500).send({
+                message: err.message
+            });
         }
     }
 }
