@@ -22,12 +22,14 @@ export interface User extends mongoose.Document {
     /**
      * Contraseña ingresada por el usuario
      */
-    password: string;
+    password: string | null;
 }
 
 const placeSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    lastName: { type: String, required: true },
     username: { type: String, required: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
 }, { collection: 'User' });
 
 export default mongoose.model<User>('User', placeSchema);

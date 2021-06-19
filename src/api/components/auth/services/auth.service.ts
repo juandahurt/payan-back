@@ -12,7 +12,8 @@ export class AuthService {
         } else if (credential.password != user.password) {
             throw AuthError.invalidCredential;
         } else {
-            let token = jwt.sign(user, 'private_key');
+            user.password = null;
+            let token = jwt.sign(user.toJSON(), process.env.JWT_PRIVATE_KEY || "private_key");
             return token;
         }
     }
