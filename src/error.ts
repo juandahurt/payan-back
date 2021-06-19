@@ -1,16 +1,24 @@
-/**
- * Centralized error object
- */
-export class AppError extends Error {
-    public description: String; 
-    public httpCode: Number; 
+export interface AppError extends Error {
+    id: number; 
+    description: string; 
+    httpCode?: number; 
+}
 
-    constructor(errObj: any, httpCode: Number) {
-        super(errObj.description);
+export class BaseError implements AppError {
+    id: number;
+    description: string;
+    httpCode: number;
+    name: string;
+    message: string;
+    stack?: string | undefined;
+
+    constructor(id: number, name: string, description: string, httpCode: number) {
         Error.call(this);
         Error.captureStackTrace(this);
-        this.name = errObj.name;
-        this.description = errObj.description;
+        this.id = id;
+        this.name = name
+        this.message = description;
+        this.description = description;
         this.httpCode = httpCode;
     }
 }

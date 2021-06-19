@@ -1,21 +1,23 @@
+import { AppError } from "../../error";
+
 /**
- * Response of every endpoint
+ * Respuesta de cada endpoint
  */
 export interface ServerResponse<T> {
     /**
-     * True if the server excecuted 
+     * True en caso de que la petición haya sido exitosa
      */
     success: boolean;
     /**
-     * Title of the response
+     * Titulo de la respuesta
      */
     title: string;
     /**
-     * Description of the response
+     * Descripción de la respuesta
      */
     description: string;
     /**
-     * Data contained in the response
+     * Datos que contiene la respuesta
      */
-    data: T;
+    data?: T;
 }

@@ -45,7 +45,11 @@ export class Express {
                 tags: [
                     {
                         name: "place",
-                        description: "Acceso a los lugares más emblemáticos"
+                        description: "Acceso a los lugares de Popayán"
+                    },
+                    {
+                        name: "auth",
+                        description: "Auntenticación de usuarios"
                     }
                 ],
                 schemes: [
@@ -54,7 +58,8 @@ export class Express {
                 ]
             },
             apis: [
-                "src/api/components/place/web/place.router.ts"
+                "src/api/components/place/web/place.router.ts",
+                "src/api/components/auth/web/auth.router.ts"
             ]
         }
         const swaggerDocs = swaggerJsDocs(swaggerOptions);
