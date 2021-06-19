@@ -13,8 +13,7 @@ export class PlaceController {
             let places = await new PlaceService().list();
             let response: ServerResponse<Place[]> = {
                 success: true,
-                title: "Éxito",
-                description: "Los lugares históricos han sido listados exitosamente.",
+                message: "Los lugares históricos han sido listados exitosamente.",
                 data: places
             }
             res.status(200).send(response);
@@ -33,8 +32,7 @@ export class PlaceController {
             let place = await new PlaceService().create(req.body);
             let response: ServerResponse<Place> = {
                 success: true,
-                title: "Éxito",
-                description: "Lugar histórico creado exitosamente.",
+                message: "Lugar histórico creado exitosamente.",
                 data: place
             }
             res.status(201).send(response);

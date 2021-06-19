@@ -13,8 +13,7 @@ export class AuthController {
             let token = await new AuthService().signIn(req.body)
             let response: ServerResponse<String> = {
                 success: true,
-                title: "Bienvenido",
-                description: "Has iniciado sesión exitosamente.",
+                message: "Has iniciado sesión exitosamente.",
                 data: token
             }
             res.status(200).send(response);
@@ -22,15 +21,19 @@ export class AuthController {
             if (err instanceof BaseError) {
                 let response: ServerResponse<null> = {
                     success: false,
-                    title: "Error",
-                    description: err.description,
+                    error: {
+                        id: err.id,
+                        description: err.description
+                    }
                 }
                 res.status(err.httpCode).send(response);
             } else {
-                let response: ServerResponse<AppError> = {
+                let response: ServerResponse<null> = {
                     success: false,
-                    title: "Ups",
-                    description: "Ha ocurrido un error desconocido..."
+                    error: {
+                        id: "NA-01",
+                        description: "Ha ocurrido un error desconocido"
+                    }
                 }
                 res.status(500).send(response);
                 console.log(err.message);

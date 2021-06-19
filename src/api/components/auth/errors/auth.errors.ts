@@ -1,12 +1,12 @@
 import { BaseError } from "../../../../error"
 
 export class AuthError extends BaseError {
-    constructor(id: number, description: string, httpCode: number) {
+    constructor(id: string, description: string, httpCode: number) {
         super(id, "AuthError", description, httpCode)
     }
 
     static invalidCredential = new AuthError(
-        1001, 
+        "AUT-01", 
         "Usuario y/o contraseña incorrectos", 
         401
     );

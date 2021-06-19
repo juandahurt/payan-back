@@ -1,3 +1,5 @@
+import { BaseError } from "../../error";
+
 /**
  * Respuesta de cada endpoint
  */
@@ -7,15 +9,18 @@ export interface ServerResponse<T> {
      */
     success: boolean;
     /**
-     * Titulo de la respuesta
+     * Mensaje de la respuesta
      */
-    title: string;
+    message?: string;
     /**
-     * Descripción de la respuesta
-     */
-    description: string;
-    /**
-     * Datos que contiene la respuesta
+     * Datos que puede contener la respuesta
      */
     data?: T;
+    /**
+     * Error que puede contener la respuesta
+     */
+    error?: {
+        id: string,
+        description: string
+    }
 }
