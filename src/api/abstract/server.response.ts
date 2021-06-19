@@ -1,5 +1,3 @@
-import { AppError } from "../../error";
-
 /**
  * Respuesta de cada endpoint
  */
