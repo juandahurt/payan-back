@@ -1,6 +1,6 @@
 import express from 'express';
 import { config, environments } from './config';
-import swaggerJsDocs, { SwaggerDefinition } from 'swagger-jsdoc';
+import swaggerJsDocs from 'swagger-jsdoc';
 import swaggerUI from 'swagger-ui-express';
 
 // @ts-ignore
@@ -50,6 +50,10 @@ export class Express {
                     {
                         name: "auth",
                         description: "Auntenticación de usuarios"
+                    },
+                    {
+                        name: "fact",
+                        description: "Datos de la ciudad de Popayán"
                     }
                 ],
                 schemes: [
@@ -59,7 +63,8 @@ export class Express {
             },
             apis: [
                 "src/api/components/place/web/place.router.ts",
-                "src/api/components/auth/web/auth.router.ts"
+                "src/api/components/auth/web/auth.router.ts",
+                "src/api/components/fact/web/fact.router.ts"
             ]
         }
         const swaggerDocs = swaggerJsDocs(swaggerOptions);
