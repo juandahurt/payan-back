@@ -1,6 +1,3 @@
-// @ts-ignore
-import logger from '@juandahurt_t/logger';
-
 import { db } from './config/database';
 import mongoose from 'mongoose';
 
@@ -16,7 +13,6 @@ export const connectToDB = async () => {
             useCreateIndex: true
         });
     } catch (err) {
-        logger.error(err.message);
         process.exit();
     }
 }
@@ -28,7 +24,6 @@ export const disconnectDB = async () => {
     try {
         await mongoose.connection.close();
     } catch (err) {
-        logger.error(err.message);
         process.exit();
     }
 }

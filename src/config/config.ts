@@ -6,5 +6,5 @@ export const environments = {
 export const config = {
     env: process.env.NODE_ENV || environments.dev,
     port: process.env.PORT || 3000,
-    host: process.env.HOST || 'localhost'
+    host: process.env.HOST || '0.0.0.0'
 };
