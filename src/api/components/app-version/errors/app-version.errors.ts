@@ -10,4 +10,10 @@ export class AppVersionError extends BaseError {
         "El número de versión no se encuentra disponible", 
         400
     );
+
+    static platformNotSupported = new AppVersionError(
+        "VER-02", 
+        "La plataforma no se encuentra soportada", 
+        400
+    );
 }

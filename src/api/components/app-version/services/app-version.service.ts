@@ -17,4 +17,14 @@ export class AppVersionService {
         })
         return await dao.create(version);
     }
+
+    public async last(platform: String): Promise<AppVersion | undefined> {
+        if (platform == "ios") {
+            let dao = new AppVersionDAO()
+            let list = await dao.list()
+            return list.pop();
+        } else {
+            throw AppVersionError.platformNotSupported
+        }
+    }
 }

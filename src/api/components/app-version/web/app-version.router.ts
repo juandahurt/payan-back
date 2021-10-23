@@ -34,5 +34,25 @@ export class AppVersionRouter {
          *         description: Success
          */
         this.router.post('/', AppVersionController.create);
+
+        /**
+         * @swagger
+         * /app-version/{platform}:
+         *   get:
+         *     tags:
+         *     - "version"
+         *     summary: Obtiene la última versión
+         *     parameters:
+         *     - in: path
+         *       name: platform
+         *       description: "Plataforma"
+         *       required: true
+         *       schema:
+         *         type: string
+         *     responses:
+         *       200:
+         *         description: Success
+         */
+         this.router.get('/:platform', AppVersionController.last);
     }
 }
