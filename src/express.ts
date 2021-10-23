@@ -54,6 +54,10 @@ export class Express {
                     {
                         name: "fact",
                         description: "Datos de la ciudad de Popayán"
+                    },
+                    {
+                        name: "version",
+                        description: "Versión del aplicativo móvil"
                     }
                 ],
                 schemes: [
@@ -64,7 +68,8 @@ export class Express {
             apis: [
                 "src/api/components/place/web/place.router.ts",
                 "src/api/components/auth/web/auth.router.ts",
-                "src/api/components/fact/web/fact.router.ts"
+                "src/api/components/fact/web/fact.router.ts",
+                "src/api/components/app-version/web/app-version.router.ts"
             ]
         }
         const swaggerDocs = swaggerJsDocs(swaggerOptions);
