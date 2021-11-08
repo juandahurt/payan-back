@@ -21,4 +21,11 @@ export class BaseError implements AppError {
         this.description = description;
         this.httpCode = httpCode;
     }
+
+    static unexpectedError = new BaseError(
+        "NA-01", 
+        "",
+        "Ha ocurrido un error desconocido",
+        500
+    )
 }

@@ -1,6 +1,7 @@
 import { Place } from "../dal/place.model";
 import { PlaceService } from "../services/place.service";
 import { ServerResponse } from "../../../abstract/server.response";
+import { Helper } from "../../../helpers/helper";
 
 export class PlaceController {
     /**
@@ -37,9 +38,7 @@ export class PlaceController {
             }
             res.status(201).send(response);
         } catch (err) {
-            res.status(500).send({
-                message: err.message
-            });
+            Helper.errorHandler(res, err);
         }
     }
 }

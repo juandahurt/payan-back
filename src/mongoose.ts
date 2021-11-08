@@ -6,24 +6,16 @@ import mongoose from 'mongoose';
  * Opens the Mongoose connection.
  */
 export const connectToDB = async () => {
-    try {
-        await mongoose.connect(db.uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true
-        });
-    } catch (err) {
-        process.exit();
-    }
+    await mongoose.connect(db.uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true
+    });
 }
 
 /**
  * Closes the Mongoose connection.
  */
 export const disconnectDB = async () => {
-    try {
-        await mongoose.connection.close();
-    } catch (err) {
-        process.exit();
-    }
+    await mongoose.connection.close();
 }
