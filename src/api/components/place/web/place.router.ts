@@ -40,6 +40,8 @@ export class PlaceRouter {
          *          properties:
          *            name:
          *              type: string
+         *            category:
+         *              type: string
          *     responses:
          *       201:
          *         description: Created

@@ -23,7 +23,7 @@ export class BaseError implements AppError {
     }
 
     static unexpectedError = new BaseError(
-        "NA-01", 
+        "NAN-01", 
         "",
         "Ha ocurrido un error desconocido",
         500
