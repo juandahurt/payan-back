@@ -6,16 +6,12 @@ export class AppVersionDAO {
      * Creates a new app version
      */
      async create(version: AppVersion): Promise<AppVersion> {
-        await connectToDB();
-        let versionCreated = await AppVersionModel.create(version)
-        await disconnectDB();
+        let versionCreated = await AppVersionModel.create(version);
         return versionCreated;
     }
 
     async list(): Promise<AppVersion[]> {
-        await connectToDB();
-        let versions = await AppVersionModel.find({})
-        await disconnectDB();
+        let versions = await AppVersionModel.find({});
         return versions;
     }
 }
