@@ -14,6 +14,16 @@ export enum PlaceCategory {
     church = "CHURCH"
 }
 
+export class GroupedCategory {
+    private category: PlaceCategory;
+    private places: Place[];
+
+    constructor(category: PlaceCategory, places: Place[]) {
+        this.category = category;
+        this.places = places;
+    }
+}
+
 const placeSchema = new mongoose.Schema({
     name: { 
         type: String,

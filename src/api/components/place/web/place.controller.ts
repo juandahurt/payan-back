@@ -1,4 +1,4 @@
-import { Place } from "../dal/place.model";
+import { GroupedCategory, Place } from "../dal/place.model";
 import { PlaceService } from "../services/place.service";
 import { ServerResponse } from "../../../abstract/server.response";
 import { Helper } from "../../../helpers/helper";
@@ -7,19 +7,32 @@ import { PlaceError } from "../errors/place.errors";
 
 export class PlaceController {
     /**
-     * Lists all the historic places
+     * Lists all the places
      * @param req Client request
      * @param res Server response
      */
      static async list(req: any, res: any) {
         try {
-            let places = await new PlaceService().list();
-            let response: ServerResponse<Place[]> = {
-                success: true,
-                message: "Los lugares históricos han sido listados exitosamente.",
-                data: places
+            let group = req.query.group
+            let service = new PlaceService();
+
+            if (group == 1) {
+                let groups = await service.listByCategory();
+                let response: ServerResponse<GroupedCategory[]> = {
+                    success: true,
+                    message: "Los lugares listados exitosamente.",
+                    data: groups
+                }
+                res.status(200).send(response);
+            } else {
+                let places = await service.list();
+                let response: ServerResponse<Place[]> = {
+                    success: true,
+                    message: "Los lugares listados exitosamente.",
+                    data: places
+                }
+                res.status(200).send(response);
             }
-            res.status(200).send(response);
         } catch (err) {
             console.log(err)
         }

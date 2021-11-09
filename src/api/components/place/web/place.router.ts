@@ -17,6 +17,14 @@ export class PlaceRouter {
          *     tags:
          *     - "place"
          *     summary: Lista los lugares registrados
+         *     parameters:
+         *     - in: query
+         *       name: group
+         *       description: Indica si los lugares deben ser agrupados por categorías
+         *       required: false
+         *       type: integer
+         *       enum: [0, 1]
+         *     
          *     responses:
          *       200:
          *         description: Success
