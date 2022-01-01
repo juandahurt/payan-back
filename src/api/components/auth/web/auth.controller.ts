@@ -1,5 +1,6 @@
 import { AppError, BaseError } from "../../../../error";
 import { ServerResponse } from "../../../abstract/server.response";
+import { Helper } from "../../../helpers/helper";
 import { AuthService } from "../services/auth.service";
 
 export class AuthController {
@@ -18,26 +19,7 @@ export class AuthController {
             }
             res.status(200).send(response);
         } catch (err) {
-            if (err instanceof BaseError) {
-                let response: ServerResponse<null> = {
-                    success: false,
-                    error: {
-                        id: err.id,
-                        description: err.description
-                    }
-                }
-                res.status(err.httpCode).send(response);
-            } else {
-                let response: ServerResponse<null> = {
-                    success: false,
-                    error: {
-                        id: "NA-01",
-                        description: "Ha ocurrido un error desconocido"
-                    }
-                }
-                res.status(500).send(response);
-                console.log(err.message);
-            }
+            Helper.errorHandler(res, err);
         }
     }
 }

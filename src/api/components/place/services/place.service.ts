@@ -1,19 +1,27 @@
 import { PlaceDAO } from "../dal/place.dao";
-import { Place } from "../dal/place.model";
+import { GroupedCategory, Place, PlaceCategory } from "../dal/place.model";
 
 export class PlaceService {
-    /**
-     * Creates a place
-     * @param place Contains the info of the new place
-     */
-     public async create(place: Place): Promise<Place> {
+    public async create(place: Place): Promise<Place> {
         return new PlaceDAO().create(place);
     }
 
-    /**
-     * Lists all the places
-     */
-     public async list(): Promise<Place[]> {
+    public async list(): Promise<Place[]> {
         return new PlaceDAO().list();
+    }
+
+    public async listByCategory(): Promise<GroupedCategory[]> {
+        let dao = new PlaceDAO();
+        let categories = Object.values(PlaceCategory);
+        let groupedPlaces: GroupedCategory[] = [];
+
+        for (let cat of categories) {
+            let places = await dao.listByCategory(cat);
+            console.log(places.length);
+            let group = new GroupedCategory(cat, places);
+            groupedPlaces.push(group);
+        }
+
+        return groupedPlaces;
     }
 }

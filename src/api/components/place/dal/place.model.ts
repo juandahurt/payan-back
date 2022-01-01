@@ -1,30 +1,38 @@
 import mongoose from 'mongoose';
 
-/**
- *  Place
- */
-export interface Place extends mongoose.Document {
-    /**
-     * Name of the historical place
-     */
-    name: string;
 
-    /**
-     * Base 64 representation of the image
-     */
+export interface Place extends mongoose.Document {
+    name: string;
     image: string;
+    category: PlaceCategory;
 }
 
-/**
- *  
- */
-export enum PlaceType {
-    historical,
-    museum
+export enum PlaceCategory {
+    museum = "MUSEUM",
+    park = "PARK",
+    bridge = "BRIDGE",
+    church = "CHURCH"
+}
+
+export class GroupedCategory {
+    private category: PlaceCategory;
+    private places: Place[];
+
+    constructor(category: PlaceCategory, places: Place[]) {
+        this.category = category;
+        this.places = places;
+    }
 }
 
 const placeSchema = new mongoose.Schema({
-    name: { type: String, required: true }
+    name: { 
+        type: String,
+        required: true 
+    },
+    category: { 
+        type: String,
+        required: true
+    }
 }, { collection: 'Place' });
 
 export default mongoose.model<Place>('Place', placeSchema);
