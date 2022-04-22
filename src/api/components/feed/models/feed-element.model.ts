@@ -5,9 +5,11 @@ export class PYFeedElement {
     secondaryImage?: string;
     link: string;
 
-    constructor() {
-        this.title = "Title";
-        this.image = "https://.."
-        this.link = "item?id=123"
+    constructor(title: string, image: string, link: string, subtitle?: string, secondaryImage?: string) {
+        this.title = title;
+        this.image = image;
+        this.link = link;
+        this.subtitle = subtitle;
+        this.secondaryImage = secondaryImage;
     }
 }

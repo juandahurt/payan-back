@@ -7,6 +7,7 @@ interface PYFeedSectionDocument extends mongoose.Document {
     layout: PYFeedSectionLayout;
     header: PYFeedSectionHeader;
     elementLayout: PYFeedElementLayout;
+    elementType: string;
 }
 
 const PYFeedSectionSchema = new mongoose.Schema({
@@ -21,6 +22,9 @@ const PYFeedSectionSchema = new mongoose.Schema({
     elementLayout: {
         type: Object,
         required: true
+    },
+    elementType: {
+        type: String
     }
 }, { collection: 'PYFeedSection' });
 

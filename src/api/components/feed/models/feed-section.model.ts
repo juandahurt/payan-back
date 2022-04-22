@@ -18,10 +18,16 @@ export class PYFeedSection {
     */
     elements: PYFeedElement[];
 
-    constructor(header: PYFeedSectionHeader, elementLayout: PYFeedElementLayout) {
+    /**
+     * Type of elements that the sections contains.
+     */
+    elementType: string;
+
+    constructor(header: PYFeedSectionHeader, elementLayout: PYFeedElementLayout, elementType: string) {
         this.header = header;
         this.elementLayout = elementLayout;
         this.elements = [];
+        this.elementType = elementType;
     }
 }
 
