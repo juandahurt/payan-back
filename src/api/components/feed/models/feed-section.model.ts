@@ -23,11 +23,17 @@ export class PYFeedSection {
      */
     elementType: string;
 
-    constructor(header: PYFeedSectionHeader, elementLayout: PYFeedElementLayout, elementType: string) {
+    /**
+     * Section's layout.
+     */
+    layout: PYFeedSectionLayout;
+
+    constructor(header: PYFeedSectionHeader, elementLayout: PYFeedElementLayout, elementType: string, layout: PYFeedSectionLayout) {
         this.header = header;
         this.elementLayout = elementLayout;
         this.elements = [];
         this.elementType = elementType;
+        this.layout = layout;
     }
 }
 

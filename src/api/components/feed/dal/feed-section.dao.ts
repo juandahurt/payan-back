@@ -8,7 +8,7 @@ export class PYFeedSectionDAO implements PYFeedSectionDataAccessLogic {
     async getAllSections(): Promise<PYFeedSection[]> {
         let sections = await FeedSectionSchema.find({})
         return sections.map((doc) => {
-            return new PYFeedSection(doc.header, doc.elementLayout, doc.elementType);
+            return new PYFeedSection(doc.header, doc.elementLayout, doc.elementType, doc.layout);
         });
     }
 }
