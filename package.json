@@ -11,7 +11,7 @@
         "url": "https://github.com/juandahurt/nodejs-template"
     },
     "engines": {
-        "node": "16.14.2",
+        "node": "14.x",
         "npm": "8.5.0"
     },
     "scripts": {
