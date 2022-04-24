@@ -11,8 +11,8 @@
         "url": "https://github.com/juandahurt/nodejs-template"
     },
     "engines": {
-        "node": "10.15.1",
-        "npm": "6.4.1"
+        "node": "16.14.2",
+        "npm": "8.5.0"
     },
     "scripts": {
         "start": "ts-node src/server.ts",
