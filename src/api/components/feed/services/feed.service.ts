@@ -19,8 +19,17 @@ export class PYFeedService implements PYFeedBusinessLogic {
         var sections = await this.feedSectionDAO.getAllSections();
         for (var sectionIndex = 0; sectionIndex < sections.length; sectionIndex++) {
             let elements = await this.elementDAO.getElementsByType(sections[sectionIndex].elementType);
-            let feedElements = this._mapElementsToFeedElements(elements);
-            sections[sectionIndex].elements = feedElements;
+            // check if elements have a subtype
+            let haveSubtype = elements.find(element => {
+                return element.subtype != undefined; 
+            });
+            if (haveSubtype) {
+                let feedElements = await this._mapElementsToFeedElementsWithSubtype(sections[sectionIndex].elementType, elements);
+                sections[sectionIndex].elements = feedElements;
+            } else {
+                let feedElements = this._mapElementsToFeedElements(elements);
+                sections[sectionIndex].elements = feedElements;
+            }
         }
         page.sections = sections;
         return page;
@@ -31,21 +40,46 @@ export class PYFeedService implements PYFeedBusinessLogic {
             return new PYFeedElement(
                 element.title,
                 element.image,
-                this._getLinkOfElement(element),
+                "/item?id=" + element.id,
                 element.subtitle
             );
         });
     }
 
-    private _getLinkOfElement(element: PYElement): string {
-        var link = ""
+    private async _mapElementsToFeedElementsWithSubtype(type: string, elements: PYElement[]): Promise<PYFeedElement[]> {
+        // get list of subtypes
+        let subtypes = elements.map(element => {
+            return element.subtype;
+        });
+        // remove the duplicated ones
+        subtypes = subtypes.filter((subtype, index) => {
+            return subtypes.indexOf(subtype) === index;
+        });
 
-        if (element.subtype) {
-            link = "/collection?type=" + element.type + "&subtype=" + element.subtype;
-        } else {
-            link = "/item?id=" + element.id;
+        let feedElements: PYFeedElement[] = []
+        for (var subtypeIndex = 0; subtypeIndex < subtypes.length; subtypeIndex++) {
+            let subtype = subtypes[subtypeIndex];
+            let subtypeElements = await this.elementDAO.getElementsByTypeAndSubtype(type, subtype!);
+            let randomElement = subtypeElements[Math.floor(Math.random()*subtypeElements.length)];
+            feedElements.push(
+                new PYFeedElement(
+                    this._translateSubtype(subtype!),
+                    randomElement.image,
+                    "/collection?type=" + type + "&subtype=" + subtype,
+                    subtypeElements.length + " elementos"
+                )
+            );
         }
+        return feedElements;
+    }
 
-        return link
+    private _translateSubtype(subtype: string): string {
+        switch (subtype) {
+            case "church":
+                return "Iglesias";
+            case "bridge":
+                return "Puentes";
+        }
+        return "";
     }
 }
