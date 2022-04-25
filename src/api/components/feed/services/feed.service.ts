@@ -19,17 +19,17 @@ export class PYFeedService implements PYFeedBusinessLogic {
         var sections = await this.feedSectionDAO.getAllSections();
         for (var sectionIndex = 0; sectionIndex < sections.length; sectionIndex++) {
             let elements = await this.elementDAO.getElementsByType(sections[sectionIndex].elementType);
-            // check if elements have a subtype
-            let haveSubtype = elements.find(element => {
-                return element.subtype != undefined; 
-            });
-            if (haveSubtype) {
-                let feedElements = await this._mapElementsToFeedElementsWithSubtype(sections[sectionIndex].elementType, elements);
-                sections[sectionIndex].elements = feedElements;
+            // check if section must be grouped by subtype
+            let section = sections[sectionIndex];
+            let feedElements: PYFeedElement[];
+            if (section.groupBySubtype) {
+                feedElements = await this._mapElementsToGroupedFeedElements(section.elementType, elements);
             } else {
-                let feedElements = this._mapElementsToFeedElements(elements);
-                sections[sectionIndex].elements = feedElements;
+                feedElements = this._mapElementsToFeedElements(elements);
             }
+            sections[sectionIndex].elements = feedElements;
+            // shuffle elements
+            sections[sectionIndex].elements.sort((a, b) => 0.5 - Math.random());
         }
         page.sections = sections;
         return page;
@@ -46,7 +46,11 @@ export class PYFeedService implements PYFeedBusinessLogic {
         });
     }
 
-    private async _mapElementsToFeedElementsWithSubtype(type: string, elements: PYElement[]): Promise<PYFeedElement[]> {
+    private async _mapElementsToGroupedFeedElements(type: string, elements: PYElement[]): Promise<PYFeedElement[]> {
+        // check if all elements have a subtype
+        let doesntHaveSubtype = elements.find(element => { return element.subtype == undefined });
+        if (doesntHaveSubtype) { return []; }
+
         // get list of subtypes
         let subtypes = elements.map(element => {
             return element.subtype;

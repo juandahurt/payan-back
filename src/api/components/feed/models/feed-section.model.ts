@@ -28,12 +28,18 @@ export class PYFeedSection {
      */
     layout: PYFeedSectionLayout;
 
-    constructor(header: PYFeedSectionHeader, elementLayout: PYFeedElementLayout, elementType: string, layout: PYFeedSectionLayout) {
+    /**
+     * Indicates if the items must be grouped by their subtype
+     */
+    groupBySubtype: boolean;
+
+    constructor(header: PYFeedSectionHeader, elementLayout: PYFeedElementLayout, elementType: string, layout: PYFeedSectionLayout, groupBySubtype: boolean) {
         this.header = header;
         this.elementLayout = elementLayout;
         this.elements = [];
         this.elementType = elementType;
         this.layout = layout;
+        this.groupBySubtype = groupBySubtype;
     }
 }
 
