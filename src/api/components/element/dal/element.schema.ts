@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { Mongoose, Types } from "mongoose";
+import { PYElementType } from "../models/element-type.model";
 
 interface PYElementDocument extends mongoose.Document {
     _id: string;
@@ -7,7 +8,6 @@ interface PYElementDocument extends mongoose.Document {
     image: string;
     description: string;
     type: string;
-    subtype?: string;
 }
 
 const PYElementSchema = new mongoose.Schema({
@@ -27,12 +27,7 @@ const PYElementSchema = new mongoose.Schema({
         required: true
     },
     type: {
-        type: String,
-        required: true
-    },
-    subtype: {
-        type: String,
-        required: false
+        type: String
     }
 }, { collection: 'PYElement' });
 

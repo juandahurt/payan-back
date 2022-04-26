@@ -1,3 +1,4 @@
+import { PYElementType } from "../../element/models/element-type.model";
 import { PYFeedElementLayout } from "./feed-element-layout.model";
 import { PYFeedElement } from "./feed-element.model";
 import { PYFeedSectionHeader } from "./feed-section-header.model";
@@ -21,7 +22,7 @@ export class PYFeedSection {
     /**
      * Type of elements that the sections contains.
      */
-    elementType: string;
+    elementType: PYElementType;
 
     /**
      * Section's layout.
@@ -33,7 +34,7 @@ export class PYFeedSection {
      */
     groupBySubtype: boolean;
 
-    constructor(header: PYFeedSectionHeader, elementLayout: PYFeedElementLayout, elementType: string, layout: PYFeedSectionLayout, groupBySubtype: boolean) {
+    constructor(header: PYFeedSectionHeader, elementLayout: PYFeedElementLayout, elementType: PYElementType, layout: PYFeedSectionLayout, groupBySubtype: boolean) {
         this.header = header;
         this.elementLayout = elementLayout;
         this.elements = [];

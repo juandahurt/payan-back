@@ -1,5 +1,5 @@
 import { boolean } from "joi";
-import mongoose from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 import { PYFeedElementLayout } from "../models/feed-element-layout.model";
 import { PYFeedSectionHeader } from "../models/feed-section-header.model";
 import { PYFeedSectionLayout } from "../models/feed-section.model";
@@ -13,6 +13,9 @@ interface PYFeedSectionDocument extends mongoose.Document {
 }
 
 const PYFeedSectionSchema = new mongoose.Schema({
+    _id: {
+        type: String
+    },
     layout: { 
         type: String,
         required: true 
@@ -26,7 +29,8 @@ const PYFeedSectionSchema = new mongoose.Schema({
         required: true
     },
     elementType: {
-        type: String
+        type: String,
+        required: true
     },
     groupBySubtype: {
         type: Boolean,
