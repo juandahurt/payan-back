@@ -17,4 +17,21 @@ export class PYElementDAO implements PYElementDataAccessLogic {
             );
         });
     }
+
+    async getElementById(id: string): Promise<PYElement | null> {
+        let docs = await ElementSchema.find({});
+        docs = docs.filter(doc => { return doc._id == id; });
+        if (docs.length == 1) {
+            let doc = docs[0];
+            return new PYElement(
+                doc._id,
+                doc.title,
+                doc.image,
+                doc.description,
+                doc.type,
+                doc.subtitle
+            );
+        }
+        return null;
+    }
 }
