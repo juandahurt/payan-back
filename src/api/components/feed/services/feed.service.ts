@@ -43,7 +43,7 @@ export class PYFeedService implements PYFeedBusinessLogic {
             return new PYFeedElement(
                 element.title,
                 element.image,
-                "payan://item?id=" + element.id,
+                "payan://elementDetails?id=" + element.id,
                 element.subtitle
             );
         });
