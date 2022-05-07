@@ -1,6 +1,6 @@
 {
-    "name": "nodejs-template",
-    "version": "1.0.1",
+    "name": "payan-back",
+    "version": "2.0.0",
     "description": "template for a node app",
     "author": "Juan David Hurtado",
     "license": "MIT",
