@@ -16,6 +16,8 @@ export class PYCollectionService implements PYCollectionBusinessLogic {
 
     async getCollectionByTypeId(typeId: string): Promise<PYCollectionDTO> {
         let elements = await this.elementDAO.getElementsByType(typeId);
+        // shuffle elements
+        elements = elements.sort((a, b) => 0.5 - Math.random());
         let types = await this.elementTypeDAO.getTypes();
         let typeName = types.find(t => { return t._id == typeId })!.name;
         let collection = new PYCollectionDTO(
