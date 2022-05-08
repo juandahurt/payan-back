@@ -1,7 +1,7 @@
 import { PYElementDAO } from "../dal/element.dao";
 import { PYElementPageDTO } from "../dtos/element-page.dto";
 import { PYElementBusinessLogic } from "../interfaces/element-business-logic.interface";
-import { PYElementSectionImageItem, PYElementSectionItemLayout, PYElementSectionTitleItem } from "../models/element-section-item.model";
+import { PYElementSectionImageItem, PYElementSectionItemLayout, PYElementSectionTextItem, PYElementSectionTextItemAlignment, PYElementSectionTitleItem } from "../models/element-section-item.model";
 import { PYElementSection } from "../models/element-section.model";
 
 export class PYElementService implements PYElementBusinessLogic {
@@ -30,8 +30,13 @@ export class PYElementService implements PYElementBusinessLogic {
             );
             let titleSection = new PYElementSection(PYElementSectionItemLayout.title);
             titleSection.items = [titleItem];
+
+            // description section
+            let descItem = new PYElementSectionTextItem(element.description, PYElementSectionTextItemAlignment.justify);
+            let descSection = new PYElementSection(PYElementSectionItemLayout.text);
+            descSection.items = [descItem];
             
-            page.sections = [imageSection, titleSection];
+            page.sections = [imageSection, titleSection, descSection];
         }
 
         return page;

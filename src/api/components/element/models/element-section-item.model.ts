@@ -1,6 +1,7 @@
 export enum PYElementSectionItemLayout {
     image = "image",
-    title = "title"
+    title = "title",
+    text = "text"
 }
 
 export class PYElementSectionItem {}
@@ -27,3 +28,20 @@ export class PYElementSectionTitleItem extends PYElementSectionItem {
     }
 }
 
+export class PYElementSectionTextItem extends PYElementSectionItem {
+    content: string;
+    alignment: PYElementSectionTextItemAlignment;
+
+    constructor(content: string, alignment: PYElementSectionTextItemAlignment) {
+        super();
+        this.content = content;
+        this.alignment = alignment;
+    }
+}
+
+export enum PYElementSectionTextItemAlignment {
+    justify = "justify",
+    right = "right",
+    left = "left",
+    center = "center"
+}
