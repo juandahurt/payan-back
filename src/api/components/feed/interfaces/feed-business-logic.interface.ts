@@ -1,16 +1,8 @@
-import { PYFeedSectionDAO } from "../dal/feed-section.dao";
-import { PYFeedPage } from "../models/feed-page.model";
+import { PYPlaceCategoryDAO } from "../../place-category/dal/place-category.dao";
+import { PYFeedPageDTO } from "../dtos/feed-page.dto";
 
 export interface PYFeedBusinessLogic {
-    /**
-     * Feed section data access object.
-     */
-    feedSectionDAO: PYFeedSectionDAO;
+    placeCategoryDAO: PYPlaceCategoryDAO;
 
-    /**
-     * Builds the feed view layout.
-     * 
-     * See `PYFeedPage`
-     */
-    buildFeedLayout(): Promise<PYFeedPage>
+    buildFeedPage(): Promise<PYFeedPageDTO>;
 }

@@ -1,16 +1,14 @@
-import { json } from "express";
 import { ServerResponse } from "../../../abstract/server.response";
-import { PYFeedBusinessLogic } from "../interfaces/feed-business-logic.interface";
-import { PYFeedPage } from "../models/feed-page.model";
+import { PYFeedPageDTO } from "../dtos/feed-page.dto";
 import { PYFeedService } from "../services/feed.service";
 
 export class PYFeedController {
     async getFeed(req: any, res: any) {
         let service = new PYFeedService();
-        let feedLayout = await service.buildFeedLayout();
-        let response: ServerResponse<PYFeedPage> = {
+        let feedPage = await service.buildFeedPage();
+        let response: ServerResponse<PYFeedPageDTO> = {
             success: true,
-            data: feedLayout
+            data: feedPage
         }
         res.status(200).send(response);
     }

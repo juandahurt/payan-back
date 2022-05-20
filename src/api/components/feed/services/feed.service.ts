@@ -1,74 +1,22 @@
-import { PYElementTypeDAO } from "../../element-type/dal/element-type.dao";
-import { PYElementDAO } from "../../element/dal/element.dao";
-import { PYElement } from "../../element/models/element.model";
-import { PYFeedSectionDAO } from "../dal/feed-section.dao";
+import { PYPlaceCategoryDAO } from "../../place-category/dal/place-category.dao";
+import { PYPlaceCategoryDTO } from "../../place-category/dtos/place_category.dto";
+import { PYFeedPageDTO } from "../dtos/feed-page.dto";
 import { PYFeedBusinessLogic } from "../interfaces/feed-business-logic.interface";
-import { PYFeedElement } from "../models/feed-element.model";
-import { PYFeedPage } from "../models/feed-page.model";
 
 export class PYFeedService implements PYFeedBusinessLogic {
-    feedSectionDAO: PYFeedSectionDAO;
-    elementDAO: PYElementDAO;
-    elementTypeDAO: PYElementTypeDAO
+    placeCategoryDAO: PYPlaceCategoryDAO;
 
-    constructor() {
-        this.feedSectionDAO = new PYFeedSectionDAO();
-        this.elementDAO = new PYElementDAO();
-        this.elementTypeDAO = new PYElementTypeDAO();
+    constructor(placeCategoryDAO: PYPlaceCategoryDAO = new PYPlaceCategoryDAO()) {
+        this.placeCategoryDAO = placeCategoryDAO;
     }
 
-    async buildFeedLayout(): Promise<PYFeedPage> {
-        let page = new PYFeedPage();
-        var sections = await this.feedSectionDAO.getAllSections();
-        for (var sectionIndex = 0; sectionIndex < sections.length; sectionIndex++) {
-            // check if section must be grouped by subtype
-            let section = sections[sectionIndex];
-            let feedElements: PYFeedElement[];
-            if (section.groupBySubtype) {
-                feedElements = await this._mapElementsToGroupedFeedElements(section.elementType._id);
-            } else {
-                let elements = await this.elementDAO.getElementsByType(sections[sectionIndex].elementType._id);
-                feedElements = this._mapElementsToFeedElements(elements);
-            }
-            sections[sectionIndex].elements = feedElements;
-            // shuffle elements
-            sections[sectionIndex].elements.sort((a, b) => 0.5 - Math.random());
-        }
-        page.sections = sections;
-        return page;
-    }
-
-    private _mapElementsToFeedElements(elements: PYElement[]): PYFeedElement[] {
-        return elements.map(element => {
-            return new PYFeedElement(
-                element.title,
-                element.image,
-                "payan://element?id=" + element.id,
-                element.subtitle
-            );
+    async buildFeedPage(): Promise<PYFeedPageDTO> {
+        let rawCategories = await this.placeCategoryDAO.listCategories();
+        let categories = rawCategories.map((category) => {
+            let name = category.name_key;
+            let n = 12; // TODO: remove mock value
+            return new PYPlaceCategoryDTO(name, n);
         });
-    }
-
-    private async _mapElementsToGroupedFeedElements(typeId: string): Promise<PYFeedElement[]> {
-        let types = await this.elementTypeDAO.getTypes();
-        let subtypes = types.filter(t => { return t.parent == typeId });
-        let feedElements: PYFeedElement[] = []
-        for (var subtypeIndex = 0; subtypeIndex < subtypes.length; subtypeIndex++) {
-            let subtype = subtypes[subtypeIndex];
-            let elements = await this.elementDAO.getElementsByType(subtype._id);
-            let subtypeElements = elements.filter(e => { 
-                return e.type == subtype._id
-            });
-            let randomElement = subtypeElements[Math.floor(Math.random()*subtypeElements.length)];
-            feedElements.push(
-                new PYFeedElement(
-                    subtype.name,
-                    randomElement.image,
-                    "payan://collection?type=" + subtype._id,
-                    subtypeElements.length + " elementos"
-                )
-            );
-        }
-        return feedElements;
-    }
+        return new PYFeedPageDTO(categories);
+    }    
 }
