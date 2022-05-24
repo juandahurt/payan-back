@@ -1,9 +1,12 @@
-import { PYPlaceCategoryDTO } from "../../place-category/dtos/place_category.dto";
+import { PYHeroPreviewDTO } from "./hero-preview.dto";
+import { PYPlaceCategoryDTO } from "./place-category.dto";
 
 export class PYFeedPageDTO {
     placeCategories: PYPlaceCategoryDTO[];
+    heroes: PYHeroPreviewDTO[];
 
-    constructor(placeCategories: PYPlaceCategoryDTO[]) {
+    constructor(placeCategories: PYPlaceCategoryDTO[], heores: PYHeroPreviewDTO[]) {
         this.placeCategories = placeCategories;
+        this.heroes = heores;
     }
 }
