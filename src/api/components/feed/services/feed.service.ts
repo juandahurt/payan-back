@@ -34,14 +34,19 @@ export class PYFeedService implements PYFeedBusinessLogic {
             let category = new PYPlaceCategoryDTO(
                 randomPlace?.image_url ?? "", 
                 __(rawCategories[i].name_key),
-                places.length
+                places.length,
+                "payan://collection?type=place&category_code=" + rawCategories[i].code
             );
             categories.push(category);
         }
 
         let rawHeroes = await this.heroDAO.listHeroes();
         let heroes = rawHeroes.map((hero) => 
-            new PYHeroPreviewDTO(hero.name, hero.image_url)
+            new PYHeroPreviewDTO(
+                hero.name, 
+                hero.image_url,
+                "payan://hero?id=" + hero.id
+            )
         );
         heroes = heroes.sort(() => .5 - Math.random());
         if (heroes.length > 4) {
