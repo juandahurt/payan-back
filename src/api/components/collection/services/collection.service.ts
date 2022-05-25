@@ -13,7 +13,19 @@ export class PYCollectionService implements PYCollectionBusinessLogic {
 
     async getCollection(type: string, category_code?: string): Promise<PYCollectionDTO> {
         let items: PYCollectionItemDTO[] = [];
-
+        switch (type) {
+            case "hero":
+                let rawHeroes = await this.heroDAO.listHeroes();
+                let heroes = rawHeroes.map(
+                    hero => new PYCollectionItemDTO(
+                        hero.name, 
+                        hero.image_url, 
+                        "payan://hero?id=" + hero.id
+                    )
+                );
+                items = items.concat(heroes);
+                break
+        }
         return new PYCollectionDTO(items);
     }
 }
