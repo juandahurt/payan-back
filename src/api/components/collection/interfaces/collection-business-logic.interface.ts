@@ -6,6 +6,7 @@ import { PYCollectionDTO } from "../dto/collection.dto";
 export interface PYCollectionBusinessLogic {
     heroDAO: PYHeroDataAccessLogic;
     placeDAO: PYPlaceDataAccessLogic;
+    placeCategoryDAO: PYPlaceCategoryDataAccessLogic;
 
     getCollection(type: string, category_code?: string): Promise<PYCollectionDTO>
 }
