@@ -1,4 +1,3 @@
-import { __ } from "i18n";
 import { PYPlaceCategoryDAO } from "../../place-category/dal/place-category.dao";
 import { PYPlaceCategoryDTO } from "../dtos/place-category.dto";
 import { PYPlaceCategoryDataAccessLogic } from "../../place-category/interfaces/place-category-data-access-logic.interface";
@@ -33,7 +32,7 @@ export class PYFeedService implements PYFeedBusinessLogic {
             }
             let category = new PYPlaceCategoryDTO(
                 randomPlace?.image_url ?? "", 
-                __(rawCategories[i].name_key),
+                rawCategories[i].name,
                 places.length,
                 "payan://collection?type=place&category_code=" + rawCategories[i].code
             );

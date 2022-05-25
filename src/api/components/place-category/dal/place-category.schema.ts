@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { PYPlaceCategoryDocument } from "./place-category.document";
 
 const PYPlaceCategorySchema = new mongoose.Schema({
-    name_key: {
+    name: {
         type: String
     },
     code: {

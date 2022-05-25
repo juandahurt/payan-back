@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { PYPlaceDocument } from "./place.document";
 
 const PYPlaceSchema = new mongoose.Schema({
-    title_key: {
+    title: {
         type: String
     },
     image_url: {
