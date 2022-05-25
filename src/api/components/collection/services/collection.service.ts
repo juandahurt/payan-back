@@ -1,3 +1,4 @@
+import { __ } from "i18n";
 import { PYHeroDAO } from "../../hero/dal/hero.dao";
 import { PYHeroDataAccessLogic } from "../../hero/interfaces/hero-data-access-logic.interface";
 import { PYCollectionItemDTO } from "../dto/collection-items.dto";
@@ -13,8 +14,10 @@ export class PYCollectionService implements PYCollectionBusinessLogic {
 
     async getCollection(type: string, category_code?: string): Promise<PYCollectionDTO> {
         let items: PYCollectionItemDTO[] = [];
+        let title = ""
         switch (type) {
             case "hero":
+                title = __("HE_TITLE")
                 let rawHeroes = await this.heroDAO.listHeroes();
                 let heroes = rawHeroes.map(
                     hero => new PYCollectionItemDTO(
@@ -26,6 +29,6 @@ export class PYCollectionService implements PYCollectionBusinessLogic {
                 items = items.concat(heroes);
                 break
         }
-        return new PYCollectionDTO(items);
+        return new PYCollectionDTO(title, items);
     }
 }
