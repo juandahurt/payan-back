@@ -25,7 +25,7 @@ export class PYFeedService implements PYFeedBusinessLogic {
         let rawCategories = await this.placeCategoryDAO.listCategories();
         let categories: PYPlaceCategoryDTO[] = [];
         for (let i = 0; i < rawCategories.length; i++) {
-            let places = await this.placeDAO.listPlacesByCategory(rawCategories[i].code);
+            let places = await this.placeDAO.listPlacesByCategory(rawCategories[i].id);
             let randomPlace: PYPlaceDocument | undefined;
             if (places.length > 0) {
                 randomPlace = places[Math.floor(Math.random() * places.length)];
@@ -34,7 +34,7 @@ export class PYFeedService implements PYFeedBusinessLogic {
                 randomPlace?.image_url ?? "", 
                 rawCategories[i].name,
                 places.length,
-                "payan://collection?type=place&category_code=" + rawCategories[i].code
+                "payan://collection?type=place&category_id=" + rawCategories[i].id
             );
             categories.push(category);
         }

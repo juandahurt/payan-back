@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { PYHeroDAO } from "../../hero/dal/hero.dao";
 import { PYHeroDataAccessLogic } from "../../hero/interfaces/hero-data-access-logic.interface";
 import { PYPlaceCategoryDAO } from "../../place-category/dal/place-category.dao";
@@ -19,7 +20,7 @@ export class PYCollectionService implements PYCollectionBusinessLogic {
         this.placeCategoryDAO = placeCategoryDAO;
     }
 
-    async getCollection(type: string, category_code?: string): Promise<PYCollectionDTO> {
+    async getCollection(type: string, category_id?: string): Promise<PYCollectionDTO> {
         let items: PYCollectionItemDTO[] = [];
         let title = ""
         switch (type) {
@@ -36,11 +37,11 @@ export class PYCollectionService implements PYCollectionBusinessLogic {
                 items = items.concat(heroes);
                 break
             case "place":
-                // TODO: check if category_code is sent!!
+                // TODO: check if category_id is provided!!
                 let categories = await this.placeCategoryDAO.listCategories();
-                let category = categories.filter(cat => cat.code == category_code)[0];
+                let category = categories.filter(cat => cat.id == Types.ObjectId(category_id))[0];
                 title = category.name;
-                let rawPlaces = await this.placeDAO.listPlacesByCategory(category_code ?? "");
+                let rawPlaces = await this.placeDAO.listPlacesByCategory(category_id ?? "");
                 let places = rawPlaces.map(
                     place => new PYCollectionItemDTO(
                         place.title, 
