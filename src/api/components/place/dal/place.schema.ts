@@ -5,7 +5,13 @@ const PYPlaceSchema = new mongoose.Schema({
     title: {
         type: String
     },
+    subtitle: {
+        type: String
+    },
     image_url: {
+        type: String
+    },
+    description: {
         type: String
     },
     category_code: {
