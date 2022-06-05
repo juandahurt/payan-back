@@ -8,7 +8,7 @@
     "keywords": [],
     "repository": {
         "type": "git",
-        "url": "https://github.com/juandahurt/nodejs-template"
+        "url": "https://github.com/juandahurt/payan-back"
     },
     "engines": {
         "node": "14.x",

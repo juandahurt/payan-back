@@ -16,7 +16,8 @@ export class PYPlaceService implements PYPlaceBusinessLogic {
             rawPlace?.image_url ?? "",
             rawPlace?.title ?? "",
             rawPlace?.subtitle ?? "",
-            rawPlace?.description ?? ""
+            rawPlace?.description ?? "",
+            rawPlace?.location ?? { lat: 0, lon: 0 }
         );
     }
 }

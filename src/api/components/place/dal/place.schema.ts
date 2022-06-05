@@ -16,6 +16,9 @@ const PYPlaceSchema = new mongoose.Schema({
     },
     category_code: {
         type: String
+    },
+    location: {
+        type: Object
     }
 }, { collection: 'PYPlace' });
 
