@@ -19,6 +19,9 @@ const PYPlaceSchema = new mongoose.Schema({
     },
     location: {
         type: Object
+    },
+    images: {
+        type: Array
     }
 }, { collection: 'PYPlace' });
 

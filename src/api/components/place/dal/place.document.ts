@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { PYPlaceImage } from "../interface/place-image.interface";
 import { PYPlaceLocation } from "../interface/place-location.interface";
 
 export interface PYPlaceDocument extends mongoose.Document {
@@ -7,4 +8,5 @@ export interface PYPlaceDocument extends mongoose.Document {
     description: string;
     subtitle: string;
     location: PYPlaceLocation;
+    images?: PYPlaceImage[];
 }

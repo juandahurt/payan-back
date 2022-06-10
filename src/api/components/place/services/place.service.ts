@@ -1,4 +1,5 @@
 import { PYPlaceDAO } from "../dal/place.dao";
+import { PYPlaceImage } from "../interface/place-image.interface";
 import { PYPlaceDTO } from "../dtos/place.dto";
 import { PYPlaceBusinessLogic } from "../interface/place-business-logic.interface";
 import { PYPlaceDataAccessLogic } from "../interface/place-data-access-logic.interface";
@@ -17,7 +18,8 @@ export class PYPlaceService implements PYPlaceBusinessLogic {
             rawPlace?.title ?? "",
             rawPlace?.subtitle ?? "",
             rawPlace?.description ?? "",
-            rawPlace?.location ?? { lat: 0, lon: 0 }
+            rawPlace?.location ?? { lat: 0, lon: 0 },
+            rawPlace?.images ?? []
         );
     }
 }
