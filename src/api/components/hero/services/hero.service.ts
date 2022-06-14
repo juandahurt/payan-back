@@ -13,6 +13,10 @@ export class PYHeroService implements PYHeroBusinessLogic {
     async getHero(id: string): Promise<PYHeroDTO> {
         // TODO: throw error when id is wrong!
         let hero = await this.heroDAO.getHero(id);
-        return new PYHeroDTO(hero?.name ?? "");
+        return new PYHeroDTO(
+            hero?.name ?? "",
+            hero?.image_url ?? "",
+            hero?.description ?? ""
+        );
     }
 }
