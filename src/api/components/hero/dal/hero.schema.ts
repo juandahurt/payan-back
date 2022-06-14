@@ -7,6 +7,9 @@ const PYHeroSchema = new mongoose.Schema({
     },
     image_url: {
         type: String
+    },
+    description: {
+        type: String
     }
 }, { collection: 'PYHero' });
 

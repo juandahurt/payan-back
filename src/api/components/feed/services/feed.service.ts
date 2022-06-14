@@ -44,7 +44,8 @@ export class PYFeedService implements PYFeedBusinessLogic {
             new PYHeroPreviewDTO(
                 hero.name, 
                 hero.image_url,
-                "payan://hero?id=" + hero.id
+                "payan://hero?id=" + hero.id,
+                hero.description
             )
         );
         heroes = heroes.sort(() => .5 - Math.random());
