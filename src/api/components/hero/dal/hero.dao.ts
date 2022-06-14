@@ -7,4 +7,9 @@ export class PYHeroDAO implements PYHeroDataAccessLogic {
         let heroes = await heroSchema.find({});
         return heroes;
     }
+
+    async getHero(id: string): Promise<PYHeroDocument | null> {
+        let hero = await heroSchema.findById(id);
+        return hero;
+    }
 }
