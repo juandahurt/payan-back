@@ -10,6 +10,9 @@ const PYHeroSchema = new mongoose.Schema({
     },
     description: {
         type: String
+    },
+    sections: {
+        type: Array
     }
 }, { collection: 'PYHero' });
 

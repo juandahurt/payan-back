@@ -16,7 +16,8 @@ export class PYHeroService implements PYHeroBusinessLogic {
         return new PYHeroDTO(
             hero?.name ?? "",
             hero?.image_url ?? "",
-            hero?.description ?? ""
+            hero?.description ?? "",
+            hero?.sections ?? []
         );
     }
 }
