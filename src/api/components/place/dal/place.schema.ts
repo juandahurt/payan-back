@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { PYPlaceDocument } from "./place.document";
 
-const PYPlaceSchema = new mongoose.Schema({
+let PYPlaceSchema = new mongoose.Schema({
     title: {
         type: String
     },
