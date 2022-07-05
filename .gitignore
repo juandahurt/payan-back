@@ -9,3 +9,4 @@ dist
 
 # Enviroment file
 .env
+.vercel
