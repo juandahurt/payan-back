@@ -18,7 +18,7 @@ export class PYStoryService implements PYStoryBusinessLogic {
     }
     let story = new PYStoryDTO(
       storyDoc!.chapters.map((chapter) => {
-        return new PYStoryChapterDTO(chapter.title, chapter.content);
+        return new PYStoryChapterDTO(chapter.title, chapter.content, chapter.media);
       })
     );
     return story;
