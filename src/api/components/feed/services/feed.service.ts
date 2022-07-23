@@ -62,7 +62,7 @@ export class PYFeedService implements PYFeedBusinessLogic {
         let stories: PYStoryPreviewDTO[] = []
         if (rawStories.length > 0) {
             stories = rawStories.map((story) => {
-                return new PYStoryPreviewDTO(story.id, story.title, story.image);
+                return new PYStoryPreviewDTO("payan://story?id=" + story.id, story.title, story.image);
             });
         }
 

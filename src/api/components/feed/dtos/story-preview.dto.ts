@@ -1,10 +1,10 @@
 export class PYStoryPreviewDTO {
-    id: string;
+    link: string;
     title: string;
     image: string;
 
-    constructor(id: string, title: string, image: string) {
-        this.id = id;
+    constructor(link: string, title: string, image: string) {
+        this.link = link;
         this.title = title;
         this.image = image;
     }
