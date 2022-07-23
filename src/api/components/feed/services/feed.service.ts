@@ -9,16 +9,21 @@ import { PYFeedBusinessLogic } from "../interfaces/feed-business-logic.interface
 import { PYHeroDataAccessLogic } from "../../hero/interfaces/hero-data-access-logic.interface";
 import { PYHeroDAO } from "../../hero/dal/hero.dao";
 import { PYHeroPreviewDTO } from "../dtos/hero-preview.dto";
+import { PYStoryDataAccessLogic } from "../../story/interfaces/story-data-access-logic.interface";
+import { PYStoryDAO } from "../../story/dal/story.dao";
+import { PYStoryPreviewDTO } from "../dtos/story-preview.dto";
 
 export class PYFeedService implements PYFeedBusinessLogic {
     placeCategoryDAO: PYPlaceCategoryDataAccessLogic;
     placeDAO: PYPlaceDataAccessLogic;
     heroDAO: PYHeroDataAccessLogic;
+    storyDAO: PYStoryDataAccessLogic;
 
-    constructor(placeCategoryDAO: PYPlaceCategoryDAO = new PYPlaceCategoryDAO(), placeDAO: PYPlaceDataAccessLogic = new PYPlaceDAO(), heroDAO: PYHeroDataAccessLogic = new PYHeroDAO()) {
+    constructor(placeCategoryDAO: PYPlaceCategoryDAO = new PYPlaceCategoryDAO(), placeDAO: PYPlaceDataAccessLogic = new PYPlaceDAO(), heroDAO: PYHeroDataAccessLogic = new PYHeroDAO(), storyDAO: PYStoryDataAccessLogic = new PYStoryDAO()) {
         this.placeCategoryDAO = placeCategoryDAO;
         this.placeDAO = placeDAO;
         this.heroDAO = heroDAO;
+        this.storyDAO = storyDAO;
     }
 
     async buildFeedPage(): Promise<PYFeedPageDTO> {
@@ -52,6 +57,15 @@ export class PYFeedService implements PYFeedBusinessLogic {
         if (heroes.length > 4) {
             heroes = heroes.slice(0, 4); // TODO: get this value from a config file (?)
         }
-        return new PYFeedPageDTO(categories, heroes);
+
+        let rawStories = await this.storyDAO.list();
+        let stories: PYStoryPreviewDTO[] = []
+        if (rawStories.length > 0) {
+            stories = rawStories.map((story) => {
+                return new PYStoryPreviewDTO(story.id, story.title, story.image);
+            });
+        }
+
+        return new PYFeedPageDTO(categories, heroes, stories);
     }    
 }

@@ -5,6 +5,9 @@ let PYStorySchema = new mongoose.Schema({
     title: {
         type: String
     },
+    image: {
+        type: String
+    },
     chapters: {
         type: Array
     }

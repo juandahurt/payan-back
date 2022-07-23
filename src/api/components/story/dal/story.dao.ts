@@ -6,4 +6,8 @@ export class PYStoryDAO implements PYStoryDataAccessLogic {
     async getStory(id: string): Promise<PYStoryDocument | null> {
         return await storySchema.findById(id);
     }
+
+    async list(): Promise<PYStoryDocument[]> {
+        return await storySchema.find({});
+    }
 }
