@@ -17,6 +17,8 @@ export class PYHeroService implements PYHeroBusinessLogic {
             hero?.name ?? "",
             hero?.image_url ?? "",
             hero?.description ?? "",
+            hero?.bornAt ?? "",
+            hero?.diedAt ?? "",
             hero?.sections ?? []
         );
     }

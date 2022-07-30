@@ -11,6 +11,12 @@ const PYHeroSchema = new mongoose.Schema({
     description: {
         type: String
     },
+    diedAt: {
+        type: String
+    },
+    bornAt: {
+        type: String
+    },
     sections: {
         type: Array
     }
