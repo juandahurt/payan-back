@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 import { PYStoryDocument } from "./story.document";
 
 let PYStorySchema = new mongoose.Schema({
+    hash: {
+        type: String
+    },
     title: {
         type: String
     },
