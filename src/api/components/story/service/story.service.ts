@@ -14,9 +14,11 @@ export class PYStoryService implements PYStoryBusinessLogic {
   async getStory(id: string): Promise<PYStoryDTO> {
     let storyDoc = await this.storyDAO.getStory(id);
     if (storyDoc == null ){
-      return new PYStoryDTO([]);
+      // TODO: throw not found error!
+      return new PYStoryDTO("", []);
     }
     let story = new PYStoryDTO(
+      storyDoc?.hash ?? "",
       storyDoc!.chapters.map((chapter) => {
         return new PYStoryChapterDTO(chapter.title, chapter.content, chapter.media);
       })
