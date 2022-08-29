@@ -42,6 +42,7 @@ export class PYCollectionService implements PYCollectionBusinessLogic {
                 let category = categories.filter(cat => cat.id == Types.ObjectId(category_id))[0];
                 title = category.name;
                 let rawPlaces = await this.placeDAO.listPlacesByCategory(category_id ?? "");
+                rawPlaces = rawPlaces.filter(place => place.isVisible);
                 let places = rawPlaces.map(
                     place => new PYCollectionItemDTO(
                         place.title, 
