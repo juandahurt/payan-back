@@ -27,6 +27,7 @@ export class PYCollectionService implements PYCollectionBusinessLogic {
             case "hero":
                 title = "Próceres";
                 let rawHeroes = await this.heroDAO.listHeroes();
+                rawHeroes = rawHeroes.filter(hero => hero.isVisible);
                 let heroes = rawHeroes.map(
                     hero => new PYCollectionItemDTO(
                         hero.name, 
