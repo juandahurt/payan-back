@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 import { PYHeroDocument } from "./hero.document";
 
 const PYHeroSchema = new mongoose.Schema({
+    code: {
+        type: String
+    },
     isVisible: {
         type: Boolean
     },

@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 import { PYPlaceDocument } from "./place.document";
 
 let PYPlaceSchema = new mongoose.Schema({
+    code: {
+        type: String
+    },
     isVisible: {
         type: Boolean
     },
