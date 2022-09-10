@@ -33,6 +33,7 @@ export class PYFeedService implements PYFeedBusinessLogic {
         for (let i = 0; i < rawCategories.length; i++) {
             let places = await this.placeDAO.listPlacesByCategory(rawCategories[i].id);
             let randomPlace: PYPlaceDocument | undefined;
+            places = places.filter(place => place.isVisible);
             if (places.length == 0) { continue; }
             randomPlace = places[Math.floor(Math.random() * places.length)];
             let category = new PYPlaceCategoryDTO(
@@ -46,6 +47,7 @@ export class PYFeedService implements PYFeedBusinessLogic {
 
         // MARK: heroes preview
         let rawHeroes = await this.heroDAO.listHeroes();
+        rawHeroes = rawHeroes.filter(hero => hero.isVisible);
         let heroes = rawHeroes.map((hero) => 
             new PYHeroPreviewDTO(
                 hero.name, 
