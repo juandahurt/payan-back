@@ -1,8 +1,8 @@
 import { PYPlaceDAO } from "../dal/place.dao";
-import { PYPlaceImage } from "../interface/place-image.interface";
 import { PYPlaceDTO } from "../dtos/place.dto";
 import { PYPlaceBusinessLogic } from "../interface/place-business-logic.interface";
 import { PYPlaceDataAccessLogic } from "../interface/place-data-access-logic.interface";
+import { PYPlaceNotFoundError } from "../errors/place.errors";
 
 export class PYPlaceService implements PYPlaceBusinessLogic {
     placeDAO: PYPlaceDataAccessLogic;
@@ -12,14 +12,19 @@ export class PYPlaceService implements PYPlaceBusinessLogic {
     }
 
     async getPlace(id: string): Promise<PYPlaceDTO> {
-        let rawPlace = await this.placeDAO.getPlace(id);
+        let placeDocument = await this.placeDAO.getPlace(id);
+        if (placeDocument == null) {
+            throw new PYPlaceNotFoundError();
+        }
+        
+        let rawPlace = placeDocument!;
         return new PYPlaceDTO(
-            rawPlace?.image_url ?? "",
-            rawPlace?.title ?? "",
-            rawPlace?.subtitle ?? "",
-            rawPlace?.description ?? "",
-            rawPlace?.location ?? { lat: 0, lon: 0 },
-            rawPlace?.images ?? []
+            rawPlace.image_url,
+            rawPlace.title,
+            rawPlace.subtitle ?? "",
+            rawPlace.description ?? "",
+            rawPlace.location ?? { lat: 0, lon: 0 },
+            rawPlace.images ?? []
         );
     }
 }

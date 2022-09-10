@@ -1,31 +1,36 @@
 export interface AppError extends Error {
-    id: string; 
-    description: string; 
-    httpCode?: number; 
+    id: string;
+    httpCode: number; 
 }
 
-export class BaseError implements AppError {
+export class PYError implements AppError {
+    /**
+     * Error identifier.
+     */
     id: string;
-    description: string;
-    httpCode: number;
-    name: string;
-    message: string;
-    stack?: string | undefined;
 
-    constructor(id: string, name: string, description: string, httpCode: number) {
+    /**
+     * Error name.
+     */
+    name: string;
+
+    /**
+     * Error message.
+     */
+    message: string;
+
+    /**
+     * HTTP code associated with the error.
+     */
+    httpCode: number;
+
+    constructor(id: string, name: string, message: string, httpCode: number) {
         Error.call(this);
         Error.captureStackTrace(this);
+
         this.id = id;
-        this.name = name
-        this.message = description;
-        this.description = description;
+        this.message = message;
+        this.name = name;
         this.httpCode = httpCode;
     }
-
-    static unexpectedError = new BaseError(
-        "NAN-01", 
-        "",
-        "Ha ocurrido un error desconocido",
-        500
-    )
 }
