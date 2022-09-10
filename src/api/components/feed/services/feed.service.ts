@@ -27,14 +27,15 @@ export class PYFeedService implements PYFeedBusinessLogic {
     }
 
     async buildFeedPage(): Promise<PYFeedPageDTO> {
+        // MARK: place categories
         let rawCategories = await this.placeCategoryDAO.listCategories();
         let categories: PYPlaceCategoryDTO[] = [];
         for (let i = 0; i < rawCategories.length; i++) {
             let places = await this.placeDAO.listPlacesByCategory(rawCategories[i].id);
             let randomPlace: PYPlaceDocument | undefined;
-            if (places.length > 0) {
-                randomPlace = places[Math.floor(Math.random() * places.length)];
-            }
+            places = places.filter(place => place.isVisible);
+            if (places.length == 0) { continue; }
+            randomPlace = places[Math.floor(Math.random() * places.length)];
             let category = new PYPlaceCategoryDTO(
                 randomPlace?.image_url ?? "", 
                 rawCategories[i].name,
@@ -44,7 +45,9 @@ export class PYFeedService implements PYFeedBusinessLogic {
             categories.push(category);
         }
 
+        // MARK: heroes preview
         let rawHeroes = await this.heroDAO.listHeroes();
+        rawHeroes = rawHeroes.filter(hero => hero.isVisible);
         let heroes = rawHeroes.map((hero) => 
             new PYHeroPreviewDTO(
                 hero.name, 
@@ -58,6 +61,7 @@ export class PYFeedService implements PYFeedBusinessLogic {
             heroes = heroes.slice(0, 4); // TODO: get this value from a config file (?)
         }
 
+        // MARK: stories previews
         let rawStories = await this.storyDAO.list();
         let stories: PYStoryPreviewDTO[] = []
         if (rawStories.length > 0) {

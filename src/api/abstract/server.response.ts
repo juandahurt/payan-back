@@ -1,26 +1,21 @@
-import { BaseError } from "../../error";
+import { PYError } from "../../error";
 
 /**
- * Respuesta de cada endpoint
+ * Server response for every endpoint.
  */
 export interface ServerResponse<T> {
     /**
-     * True en caso de que la petición haya sido exitosa
+     * True if the request was successful.
      */
     success: boolean;
+    
     /**
-     * Mensaje de la respuesta
-     */
-    message?: string;
-    /**
-     * Datos que puede contener la respuesta
+     * Possible data associated with the response. Only if it was successful!
      */
     data?: T;
+
     /**
-     * Error que puede contener la respuesta
+     * Error that may occur.
      */
-    error?: {
-        id: string,
-        description: string
-    }
+    error?: PYError;
 }
