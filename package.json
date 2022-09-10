@@ -1,6 +1,6 @@
 {
-    "name": "nodejs-template",
-    "version": "1.0.1",
+    "name": "payan-back",
+    "version": "2.0.0",
     "description": "template for a node app",
     "author": "Juan David Hurtado",
     "license": "MIT",
@@ -8,11 +8,11 @@
     "keywords": [],
     "repository": {
         "type": "git",
-        "url": "https://github.com/juandahurt/nodejs-template"
+        "url": "https://github.com/juandahurt/payan-back"
     },
     "engines": {
-        "node": "10.15.1",
-        "npm": "6.4.1"
+        "node": "14.x",
+        "npm": "8.5.0"
     },
     "scripts": {
         "start": "ts-node src/server.ts",

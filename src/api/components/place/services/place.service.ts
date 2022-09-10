@@ -1,27 +1,30 @@
-import { PlaceDAO } from "../dal/place.dao";
-import { GroupedCategory, Place, PlaceCategory } from "../dal/place.model";
+import { PYPlaceDAO } from "../dal/place.dao";
+import { PYPlaceDTO } from "../dtos/place.dto";
+import { PYPlaceBusinessLogic } from "../interface/place-business-logic.interface";
+import { PYPlaceDataAccessLogic } from "../interface/place-data-access-logic.interface";
+import { PYPlaceNotFoundError } from "../errors/place.errors";
 
-export class PlaceService {
-    public async create(place: Place): Promise<Place> {
-        return new PlaceDAO().create(place);
+export class PYPlaceService implements PYPlaceBusinessLogic {
+    placeDAO: PYPlaceDataAccessLogic;
+
+    constructor(placeDAO: PYPlaceDataAccessLogic = new PYPlaceDAO()) {
+        this.placeDAO = placeDAO;
     }
 
-    public async list(): Promise<Place[]> {
-        return new PlaceDAO().list();
-    }
-
-    public async listByCategory(): Promise<GroupedCategory[]> {
-        let dao = new PlaceDAO();
-        let categories = Object.values(PlaceCategory);
-        let groupedPlaces: GroupedCategory[] = [];
-
-        for (let cat of categories) {
-            let places = await dao.listByCategory(cat);
-            console.log(places.length);
-            let group = new GroupedCategory(cat, places);
-            groupedPlaces.push(group);
+    async getPlace(id: string): Promise<PYPlaceDTO> {
+        let placeDocument = await this.placeDAO.getPlace(id);
+        if (placeDocument == null) {
+            throw new PYPlaceNotFoundError();
         }
-
-        return groupedPlaces;
+        
+        let rawPlace = placeDocument!;
+        return new PYPlaceDTO(
+            rawPlace.image_url,
+            rawPlace.title,
+            rawPlace.subtitle ?? "",
+            rawPlace.description ?? "",
+            rawPlace.location ?? { lat: 0, lon: 0 },
+            rawPlace.images ?? []
+        );
     }
 }

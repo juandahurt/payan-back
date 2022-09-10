@@ -1,13 +1,17 @@
 import express from 'express';
-import { AppVersionRouter } from './components/app-version/web/app-version.router';
-import { AuthRouter } from './components/auth/web/auth.router';
-import { FactRouter } from './components/fact/web/fact.router';
-import { PlaceRouter } from './components/place/web/place.router';
+import { PYCollectionRouter } from './components/collection/web/collection.router';
+import { PYFeedRouter } from './components/feed/web/feed.router';
+import { PYHeroRouter } from './components/hero/web/hero.router';
+import { PYPlaceRouter } from './components/place/web/place.router';
+import { SearchRouter } from './components/search/web/search.router';
+import { PYStoryRouter } from './components/story/web/story.router';
 
 const appRouter = express.Router();
-appRouter.use('/place', new PlaceRouter().router);
-appRouter.use('/auth', new AuthRouter().router);
-appRouter.use('/fact', new FactRouter().router);
-appRouter.use('/app-version', new AppVersionRouter().router);
+appRouter.use('/feed', new PYFeedRouter().router);
+appRouter.use('/collection', new PYCollectionRouter().router);
+appRouter.use('/place', new PYPlaceRouter().router);
+appRouter.use('/hero', new PYHeroRouter().router);
+appRouter.use('/search', new SearchRouter().router);
+appRouter.use('/story', new PYStoryRouter().router);
 
 export default appRouter;
