@@ -6,6 +6,7 @@ export class PYPlaceRouter {
     router = express.Router();
 
     constructor() {
-        this.router.use("/", this.controller.getPlace);
+        this.router.get("/", this.controller.getPlace);
+        this.router.get("/locations", this.controller.getPlacesLocations);
     }
 }

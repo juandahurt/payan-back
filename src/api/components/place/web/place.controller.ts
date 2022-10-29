@@ -1,6 +1,7 @@
 import { PYError } from "../../../../error";
 import { ServerResponse } from "../../../abstract/server.response";
 import { PYUnknownError } from "../../../common/errors/server.errors";
+import { PYPlaceLocationDTO } from "../dtos/place-location.dto";
 import { PYPlaceDTO } from "../dtos/place.dto";
 import { PYPlaceService } from "../services/place.service";
 
@@ -31,6 +32,25 @@ export class PYPlaceController {
                 }
                 res.status(error.httpCode).send(response);
             }
+        }
+    }
+
+    async getPlacesLocations(req: any, res: any) {
+        let service = new PYPlaceService();
+        try {
+            let places = await service.getPlacesLocations();
+            let response: ServerResponse<PYPlaceLocationDTO[]> = {
+                success: true,
+                data: places
+            }
+            res.status(200).send(response);   
+        } catch (e) {
+            let error = new PYUnknownError();
+            let response: ServerResponse<null> = {
+                success: false,
+                error: error
+            }
+            res.status(error.httpCode).send(response);
         }
     }
 }
