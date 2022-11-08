@@ -37,7 +37,8 @@ export class PYPlaceService implements PYPlaceBusinessLogic {
         return rawPlaces.map((p) => {
             return new PYPlaceLocationDTO(
                 p.title,
-                p.location
+                p.location,
+                "payan://place?id=" + p.id
             );
         });
     }
