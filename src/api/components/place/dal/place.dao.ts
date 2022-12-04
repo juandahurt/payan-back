@@ -15,4 +15,8 @@ export class PYPlaceDAO implements PYPlaceDataAccessLogic {
         });
         return places;
     }
+
+    async getPlacesLocations(): Promise<PYPlaceDocument[]> {
+        return await placeSchema.find({});
+    }
 }
