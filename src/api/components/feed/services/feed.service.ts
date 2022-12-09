@@ -53,12 +53,12 @@ export class PYFeedService implements PYFeedBusinessLogic {
                 hero.name, 
                 hero.image_url,
                 "payan://hero?id=" + hero.id,
-                hero.description
+                hero.bornAt + " - " + hero.diedAt
             )
         );
         heroes = heroes.sort(() => .5 - Math.random());
-        if (heroes.length > 4) {
-            heroes = heroes.slice(0, 4); // TODO: get this value from a config file (?)
+        if (heroes.length > 1) {
+            heroes = heroes.slice(0, 2); // TODO: get this value from a config file (?)
         }
 
         // MARK: stories previews
