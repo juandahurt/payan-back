@@ -31,6 +31,7 @@ export class PYCollectionService implements PYCollectionBusinessLogic {
                 let heroes = rawHeroes.map(
                     hero => new PYCollectionItemDTO(
                         hero.name, 
+                        hero.bornAt + " - " + hero.diedAt,
                         hero.image_url, 
                         "payan://hero?id=" + hero.id
                     )
@@ -47,6 +48,7 @@ export class PYCollectionService implements PYCollectionBusinessLogic {
                 let places = rawPlaces.map(
                     place => new PYCollectionItemDTO(
                         place.title, 
+                        place.subtitle,
                         place.image_url, 
                         "payan://place?id=" + place.id
                     )
