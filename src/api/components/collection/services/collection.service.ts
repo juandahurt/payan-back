@@ -48,7 +48,7 @@ export class PYCollectionService implements PYCollectionBusinessLogic {
                 let places = rawPlaces.map(
                     place => new PYCollectionItemDTO(
                         place.title, 
-                        place.subtitle,
+                        place.subtitle ?? "",
                         place.image_url, 
                         "payan://place?id=" + place.id
                     )
